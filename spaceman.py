@@ -1,4 +1,6 @@
 import random
+import os
+
 game_over=False
 incorrect_guesses_left=7
 
@@ -9,11 +11,12 @@ def load_word():
     Returns: 
            string: The secret word to be used in the spaceman guessing game
     '''
-    f = open('words.txt', 'r')
+    # f = open('/Users/jkatzer/dev/courses/cs-1-1/spaceman/words.txt', 'r')
+    f=open(os.path.dirname(os.path.realpath(__file__))+'/words.txt','r')
     words_list = f.readlines()
     f.close()
 
-    words_list = words_list[0].split(' ')
+    words_list=words_list[0].split(' ')
     secret_word = random.choice(words_list)
     return secret_word
 
@@ -29,7 +32,7 @@ def is_word_guessed(secret_word, letters_guessed):
     # TODO: Loop through the letters in the secret_word and check if a letter is not in lettersGuessed
     guessed=True
     for letter in list(secret_word):
-        if letter in letters_guessed:
+        if letter not in letters_guessed:
             guessed=False
     return guessed
 
@@ -73,10 +76,10 @@ def spaceman(secret_word):
     Args:
       secret_word (string): the secret word to guess.
     '''
-    print("Welcome to spaceman!")
+    print("Welcome to Spaceman!")
     print("Spaceman is a guessing game. There is a mystery word which you will try to guess one letter at a time. A placeholder is initially shown, with the number of blanks corresponding to the number of letters in the word. If the letter is in the mystery word, the position(s) of the letter(s) are revealed in the placeholders. Guess the word before you run out of guesses!")
     print("You win if you can guess the mystery word before the spaceman is drawn. The spaceman is made up of seven parts, and each part is drawn for each incorrect guess. If all seven parts get drawn before you guess the word, then you lose.")
-    #Inspired by Spaceman Project Spec from Make School
+    # Inspired by Spaceman Project Spec from Make School
     begin_game=input("Ready? Press enter to begin the game.")
     guess_number=0
     letters_guessed=[]
@@ -107,7 +110,6 @@ def spaceman(secret_word):
                         for letter in not_yet_guessed:
                             not_yet_guessed_string=not_yet_guessed_string+letter
                         print("These letters haven't been guessed yet: "+not_yet_guessed_string)
-spaceman(load_word)
 
 
 
@@ -121,11 +123,6 @@ spaceman(load_word)
 
     #TODO: check if the game has been won or lost
 
-
-
-
-
-
 #These function calls that will start the game
 secret_word = load_word()
-spaceman(load_word())
+spaceman(secret_word)
