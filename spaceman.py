@@ -11,8 +11,9 @@ def load_word():
     Returns: 
            string: The secret word to be used in the spaceman guessing game
     '''
-    # f = open('/Users/jkatzer/dev/courses/cs-1-1/spaceman/words.txt', 'r')
+
     f=open(os.path.dirname(os.path.realpath(__file__))+'/words.txt','r')
+    # credit https://stackoverflow.com/questions/5137497/find-current-directory-and-files-directory
     words_list = f.readlines()
     f.close()
 
@@ -79,6 +80,7 @@ def spaceman(secret_word):
     print("Welcome to Spaceman!")
     print("Spaceman is a guessing game. There is a mystery word which you will try to guess one letter at a time. A placeholder is initially shown, with the number of blanks corresponding to the number of letters in the word. If the letter is in the mystery word, the position(s) of the letter(s) are revealed in the placeholders. Guess the word before you run out of guesses!")
     print("You win if you can guess the mystery word before the spaceman is drawn. The spaceman is made up of seven parts, and each part is drawn for each incorrect guess. If all seven parts get drawn before you guess the word, then you lose.")
+    print("Your word contains "+str(len(secret_word))+" letters.")
     # Inspired by Spaceman Project Spec from Make School
     begin_game=input("Ready? Press enter to begin the game.")
     guess_number=0
