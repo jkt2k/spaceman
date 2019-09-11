@@ -1,5 +1,6 @@
 import random
 import os
+from time import sleep
 game_over=False
 
 def load_word():
@@ -34,6 +35,25 @@ def is_guess_in_word(guess, secret_word):
             return True
     return False
 
+def play_again(question_with_tone):
+    decision=input(question_with_tone)
+    if decision[0]=="y" or decision[0]=="Y":
+        global secret_word
+        global game_over
+        secret_word=load_word()
+        game_over=False
+        clear=lambda: os.system('clear')
+        print("OK!")
+        print("Loading... (not actually though)")
+        sleep(1)
+        clear()
+        spaceman(secret_word)
+    else:
+        print("Okay, see you next time!")
+        sleep(0.25)
+        exit()
+
+
 def spaceman(secret_word):
     print("Welcome to Spaceman!")
     print("Spaceman is a guessing game. There is a mystery word which you will try to guess one letter at a time. A placeholder is initially shown, with the number of blanks corresponding to the number of letters in the word. If the letter is in the mystery word, the position(s) of the letter(s) are revealed in the placeholders. Guess the word before you run out of guesses!")
@@ -63,6 +83,7 @@ def spaceman(secret_word):
             if check_for_word==secret_word: #...unless they guess the word itself
                 game_over=True
                 print("[!!!!!] YOU WIN!!! You figured out what the word is.")
+                play_again("Do you want to play again? ")
             else:
                 print("You can only enter one character.")
                 guess_number=guess_number-1
@@ -81,6 +102,7 @@ def spaceman(secret_word):
                     if is_word_guessed(secret_word,letters_guessed)==True:
                         print("[!!!] ...YOU GOT IT! The word is "+secret_word+".")
                         game_over=True
+                        play_again("Do you want to play again? ")
                     else:
                         print("LETTER UNCOVERED: "+get_guessed_word(secret_word,letters_guessed))
                 else: #letter not in word
@@ -92,6 +114,7 @@ def spaceman(secret_word):
                         game_over=True
                         print("[!] YOU LOSE!")
                         print("The word was \""+secret_word+".\"")
+                        play_again("Want to try again? ")
                     else:
                         print("You have "+str(incorrect_guesses_left)+" guesses left.")
 
