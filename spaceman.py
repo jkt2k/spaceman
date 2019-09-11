@@ -53,7 +53,6 @@ def play_again(question_with_tone):
         sleep(0.25)
         exit()
 
-
 def spaceman(secret_word):
     print("Welcome to Spaceman!")
     print("Spaceman is a guessing game. There is a mystery word which you will try to guess one letter at a time. A placeholder is initially shown, with the number of blanks corresponding to the number of letters in the word. If the letter is in the mystery word, the position(s) of the letter(s) are revealed in the placeholders. Guess the word before you run out of guesses!")
@@ -116,7 +115,7 @@ def spaceman(secret_word):
                         print("The word was \""+secret_word+".\"")
                         play_again("Want to try again? ")
                     else:
-                        print("You have "+str(incorrect_guesses_left)+" guesses left.")
+                        print("You have "+str(incorrect_guesses_left)+" incorrect guesses left.")
 
 secret_word = load_word()
 spaceman(secret_word)
